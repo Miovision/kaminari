@@ -18,6 +18,7 @@ module Kaminari
       # * <tt>:ANY_OTHER_VALUES</tt> - Any other hash key & values would be directly passed into each tag as :locals value.
       def paginate(scope, paginator_class: Kaminari::Helpers::Paginator, template: nil, **options)
         options[:total_pages] ||= scope.total_pages
+        options[:total_count] ||= scope.total_count
         options.reverse_merge! current_page: scope.current_page, per_page: scope.limit_value, remote: false
 
         paginator = paginator_class.new (template || self), options
